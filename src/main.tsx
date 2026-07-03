@@ -16,7 +16,7 @@ export const App = () => {
         onClick={() => {
           login?.({
             onSuccess: (data) => {
-              if (data?.username || data?.id) {
+              if (!data?.username || !data?.id) {
                 console.log("Ошибка 1", data);
 
                 return;
