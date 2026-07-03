@@ -4,10 +4,9 @@ import { useTelegramAuth } from "./hooks/useTelegramAuth";
 
 export const App = () => {
   const [records, setRecords] = useState<{ id: number; text: string }[]>([]);
+  const botId = import.meta.env.VITE_TELEGRAM_AUTH_BOT_ID;
 
-  const { login, isReady: isReadyTgAuth } = useTelegramAuth(
-    import.meta.env.VITE_TELEGRAM_AUTH_BOT_ID,
-  );
+  const { login, isReady: isReadyTgAuth } = useTelegramAuth(botId);
 
   return (
     <div>
@@ -18,12 +17,13 @@ export const App = () => {
           login?.({
             onSuccess: (data) => {
               if (data?.username || data?.id) {
-                console.log("Ошибка 1");
+                console.log("Ошибка 1", data);
 
                 return;
               }
 
-              console.log("успех", data);
+              console.log("success", data);
+
               setRecords((prev) => [
                 ...prev,
                 {
