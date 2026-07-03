@@ -60,6 +60,7 @@ export const useTelegramAuth = (botId?: number, enabled = true) => {
       window.Telegram.Login.auth(
         { bot_id: botId, request_access: "write", lang: "ru" },
         (data) => {
+          console.log("data", data);
           if (!data) {
             onError?.(new Error("TELEGRAM_AUTH_ERROR"));
           } else {
